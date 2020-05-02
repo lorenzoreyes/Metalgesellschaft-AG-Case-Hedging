@@ -1,0 +1,28 @@
+This projects handles the Metalgesellschaft AG Case
+You have to hedge oil contracts prices for what you
+are already compromised, selling contracts at C $24 
+160millions barrells (delta_barrels) of total 1.6 Billions
+
+The goal is to test the Full-Stacked Hedge Strategy
+which consists of covering your positions according 
+it expires by each delivery that you make.
+For that you have to, 
+(1) generate binomial spot tree, 
+so you have the evolution of your spot in time, Sts.
+(2) then apply, (C - Sts) * delta_barrels of the period.
+You will get the results of your deliveries evolution, or
+call it your operative results.
+(3) you need to know how your remaining contracts are
+performing. So, grab again the binomial tree of your Sts, 
+apply it by the total of your barrels compromised and add
+the results of your deliveries.
+(Sts * b) + operative_results
+You will end up with the financial results, but also as you
+have the evolution of each node, you also have the evolution
+of your own budget.
+
+Note: you start selling at C 24.0 with a S Spot of 20.0,
+the difference multiply by delta barresls give you a
+640.0 of Margin Safety to operate.
+If you loose your Margin of Safety, you will get a 
+critical node and end the game.
